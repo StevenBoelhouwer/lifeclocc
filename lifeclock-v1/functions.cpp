@@ -37,8 +37,9 @@ void numberToDisplay(unsigned long number) {
   for ( int i = 0; i < 10; i++ ) {
     digit = workingCounter % 10;
     workingCounter = workingCounter / 10;
-    if ( workingCounter == 0 && digit == 0 ) setBlank(i);
-    else setDigit(i, digit);
+    //if ( workingCounter == 0 && digit == 0 ) setBlank(i);
+    //else setDigit(i, digit);
+    setDigit(i, digit);
   }
 }
 
@@ -88,8 +89,8 @@ void dateToDisplay(uint16_t d, uint16_t m, uint16_t y, uint8_t blinkWhich) {
   for ( int i = 0; i < 4; i++ ) {
     digit = workings % 10;
     workings = workings / 10;
-    if ( blinkWhich == 1 && blinkPhase ) setBlank(i + 6);
-    else setDigit(i + 6, digit);
+    if ( blinkWhich == 1 && blinkPhase ) setBlank(i);
+    else setDigit(i, digit);
   }
 
   // Set month
@@ -97,8 +98,8 @@ void dateToDisplay(uint16_t d, uint16_t m, uint16_t y, uint8_t blinkWhich) {
   for ( int i = 0; i < 2; i++ ) {
     digit = workings % 10;
     workings = workings / 10;
-    if ( blinkWhich == 2 && blinkPhase ) setBlank(i + 3);
-    else setDigit(i + 3, digit);
+    if ( blinkWhich == 2 && blinkPhase ) setBlank(i + 5);
+    else setDigit(i + 5, digit);
   }
 
   // Set date
@@ -106,8 +107,8 @@ void dateToDisplay(uint16_t d, uint16_t m, uint16_t y, uint8_t blinkWhich) {
   for ( int i = 0; i < 2; i++ ) {
     digit = workings % 10;
     workings = workings / 10;
-    if ( blinkWhich == 3 && blinkPhase ) setBlank(i);
-    else setDigit(i, digit);
+    if ( blinkWhich == 3 && blinkPhase ) setBlank(i + 8);
+    else setDigit(i + 8, digit);
   }
 }
 
@@ -250,7 +251,7 @@ void setTime() {
 unsigned long getSecondsTillDeath() {
   tm2.Day = birthDate.date;
   tm2.Month = birthDate.month;
-  tm2.Year = birthDate.year + 80 - 1970;
+  tm2.Year = birthDate.year - 1970;
   tm2.Hour = tm2.Minute = tm2.Second = 0;
   time_t t1 = makeTime(tm);
   time_t t2 = makeTime(tm2);
